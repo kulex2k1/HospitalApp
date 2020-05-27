@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% load widget_tweaks %}
+
+{% block cardtitle%} Add New Patient {% endblock%}
+{% block breadcrumb%}Add New Patient Info {% endblock%}
+{% block content %}
+
+
+    
+        <form action="" method="post">      
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="fullName">Full Name</label>
+                  {% render_field form.fullName placeholder="Full Name" type="text" class="form-control" %}
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="gender">Gender</label>
+                  {% render_field form.gender placeholder="Gender" type="text" class="form-control" %}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="blood_group">Blood Group</label>        
+                  {% render_field form.blood_group placeholder="Blood Group" type="text" class="form-control" %}
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="birth_date">Date ofBirth</label>
+
+                  {% render_field form.birth_date placeholder="Date of Birth" type="date" class="form-control" %}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="phone">Phone Number</label>
+                  {% render_field form.phone placeholder="Phone Number" type="text" class="form-control" %}
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="address">Address</label>
+                  {% render_field form.address placeholder="Address" type="text" class="form-control" %}
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="patient_email">Email</label>
+                  {% render_field form.patient_email placeholder="Email" type="email" class="form-control" %}
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="status">Status</label>
+                  {% render_field form.status placeholder="Status" type="text" class="form-control" %}
+                </div>
+             </div>
+
+              
+            <button type="submit" class="btn btn-success btn-lg">Save</button> 
+            <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cancel</a>
+           
+          </form>
+
+{%endblock%}

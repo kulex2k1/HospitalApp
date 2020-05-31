@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Patients, CaseHistory
+from .models import Patients, CaseHistory, Payments, Schedule
 
 
 class PatientsForm(forms.ModelForm):
@@ -12,4 +12,18 @@ class CaseHistoryForm(forms.ModelForm):
     class Meta:
         model = CaseHistory
         fields = '__all__'
-        #exclude = ['create_date']
+        exclude = ['patient']
+
+
+class AddCaseForm(forms.ModelForm):
+    class Meta:
+        model = CaseHistory
+        fields = '__all__'
+        exclude = ['patient_name','patient' ]
+
+
+class ScheduleForm(forms.ModelForm):
+    class Meta:
+        model = Schedule
+        fields = '__all__' 
+        exclude = ['patient_name']

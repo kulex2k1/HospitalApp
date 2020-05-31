@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'hms',
     'widget_tweaks',
     'django_filters',
+    'django_wysiwyg',
+
+
 
 ]
 

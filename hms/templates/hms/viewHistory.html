@@ -3,7 +3,6 @@
 {% block breadcrumb%} Patient Case History {% endblock%}
 
 {% block content %}
-
 <section class="content">
     <div class="container-fluid">
       <!-- Main row -->
@@ -12,15 +11,8 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Case History</h3>
-
-              <div class="card-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                  <div class="input-group-append">
-                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                  </div>
-                </div>
+              <div class="card-tools">  
+                    <a href="{% url 'addCase' pat.id %}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Add New Case</a>
               </div>
             </div>
             <!-- /.card-header -->
@@ -32,7 +24,7 @@
                     <th>Date</th>
                     <th>Full Name</th>
                     <th>Description</th>
-                
+                    <th>Status</th>
                     
                   </tr>
                 </thead>
@@ -43,7 +35,7 @@
                     <td>{{case.entry_date}}</td>
                     <td>{{case.patient_name}}</td>
                     <td>{{case.description}}</td>
-                    
+                    <td>{{case.case_status}}</td>
                     <td> <a href="{% url 'home' %}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">View</a> </td>
         
                   </tr>

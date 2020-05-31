@@ -1,11 +1,16 @@
-from django.shortcuts import render, redirect
-from .forms import PatientsForm, CaseHistoryForm
-from .models import Patients, CaseHistory
-from .filter import PatientsFilter
+from django.shortcuts import render, redirect, reverse
+from .forms import PatientsForm, CaseHistoryForm, AddCaseForm, ScheduleForm
+from .models import Patients, CaseHistory, Payments, Schedule
+from .filter import PatientsFilter, ScheduleFilter
 
 
 
 # Create your views here.
+def test(request): 
+
+    return render(request, 'hms/viewHistory2.html')
+
+
 def home(request): 
     patients = Patients.objects.all()
     context = {'patients': patients} 
@@ -28,11 +33,19 @@ def addPatient(request):
     return render(request, 'hms/addPatient.html', context)
 
 
-def patientList(request):
-    patients = Patients.objects.all()
+""" def patientList(request):
+    patients =  Patients.objects.all().order_by('create_date')
     myFilter = PatientsFilter(request.GET, queryset = patients)
     patients = myFilter.qs
     context = {'patients': patients, 'myFilter': myFilter}
+    return render(request, 'tableonly.html', context) """
+
+
+def patientList(request, pk):
+    schedules =  Schedule.objects.filter(id=pk)
+    myFilter = ScheduleFilter(request.GET, queryset = schedules)
+    patients = myFilter.qs
+    context = {'schedules': schedules, 'myFilter': myFilter}
     return render(request, 'tableonly.html', context)
 
 
@@ -61,24 +74,53 @@ def caseHistory(request):
         if form.is_valid():
             form.save()
             return redirect('home')   
-        
     form = CaseHistoryForm()
     context = {'form':form}
     return render(request, 'hms/caseHistory.html', context)
 
-""" def viewCaseHistory(request, pk):
-    history = CaseHistory.objects.get(id=pk)
-    form = CaseHistoryForm(instance = history)
+def Payments(request):
+    return render(request, 'hms/payment.html')
+
+
+def queue(request):
+    patients =  Patients.objects.all().order_by('create_date')
+
+    myFilter = PatientsFilter(request.GET, queryset = patients)
+    patients = myFilter.qs
+    context = {'patients': patients, 'myFilter': myFilter}
+    return render(request, 'tableandcard.html', context)
+
+
+def AddCase(request, pk):
+    cases = Patients.objects.get(id=pk)
+    form = CaseHistoryForm()
     if request.method == 'POST':
-        form = CaseHistoryForm(request.POST, instance = history)
+        form = CaseHistoryForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             form.save()
             return redirect('patientList')   
-    context = {'form':form}
-    return render(request, 'hms/caseHistory.html', context) """
+    form = CaseHistoryForm()
+    context = {'cases': cases, 'form': form}
+    return render(request, 'hms/addCase.html', context)
+
 
 def viewCaseHistory(request, pk):
-    history = CaseHistory.objects.get(id=pk)
-
-    context = {'history': history}
+    history = CaseHistory.objects.filter(patient_name_id=pk)
+    pat = Patients.objects.get(id=pk)
+    context = {'history': history, 'pat': pat}
+  
     return render(request, 'hms/viewHistory.html', context)
+
+
+
+def addSchedule(request, pk):
+    patients = Patients.objects.get(id=pk)
+    form = ScheduleForm()
+    if request.method == 'POST':
+        form = ScheduleForm(request.POST)
+        if form.is_valid():
+           form.save()
+           return redirect ('home')
+    context = {'form':form, 'patients':patients } 
+    return render(request, 'hms/schedule.html', context)

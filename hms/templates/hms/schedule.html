@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% load widget_tweaks %}
+
+{% block cardtitle%} Patient Schedule  {% endblock%}
+{% block breadcrumb%} Patient Schedule  {% endblock%}
+{% block content %}
+
+
+<form action="" method="post">      
+    {% csrf_token %}
+        <div class="form-group col-md-6" >
+          <div><label for="schedule_date" style="color:red">{% now ' m/d/Y' %}</label></div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="patient_name">Patient:  </label> {{patients.fullName}}
+            <input type="hidden" id="patient_name" name="patient_name" value = '{{cases.id}}'>
+            
+          </div> 
+       
+          <div class="form-group col-md-6">
+            <label for="description">Body Temprature</label>
+            {% render_field form.temperature  placeholder="Body Temprature" type="text" class="form-control" %}
+          </div> 
+
+          <div class="form-group col-md-6">
+            <label for="case_status">Blood Pressure</label>
+            {% render_field form.blood_pressure placeholder="Blood Pressure" type="text" class="form-control" %}
+          </div> 
+
+    <button type="submit" class="btn btn-primary active">Submit</button> 
+  </form>
+
+
+{%endblock%}

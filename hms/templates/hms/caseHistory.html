@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 {% load widget_tweaks %}
 
-{% block cardtitle%} Patient Case History {% endblock%}
-{% block breadcrumb%}Add Patient Case {% endblock%}
+{% block cardtitle%} Add Case Note {% endblock%}
+{% block breadcrumb%}Add Case Note {% endblock%}
 {% block content %}
 
 
@@ -17,13 +17,22 @@
             <label for="patient_name">Patient Name</label>
             {% render_field form.patient_name  placeholder="Patient Name" type="text" class="form-control" %}
           </div>
-     
+
+       
           <div class="form-group col-md-6">
             <label for="description">Description</label>
             {% render_field form.description  placeholder="Description" type="text" class="form-control" %}
           </div> 
 
+          <div class="form-group col-md-6">
+            <label for="case_status">Description</label>
+            {% render_field form.case_status  placeholder="Case" type="text" class="form-control" %}
+          </div> 
     <button type="submit" class="btn btn-primary active">Submit</button> 
-  
   </form>
+
+
+
+
+  
 {%endblock%}

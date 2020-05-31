@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% load widget_tweaks %}
+ 
+ {% block cardtitle%} Add Case Note - {{cases.fullName}} {% endblock%}
+ {% block breadcrumb%} Add Case Note {% endblock%}
+ {% block content %}
+ 
+
+ <form action="" method="post">      
+    {% csrf_token %}
+        <div class="form-group col-md-6" >
+          <div><label for="entry_date" style="color:red">{% now ' m/d/Y' %}</label></div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="patient_name">Patient:  </label> {{cases.fullName}}
+            <input type="hidden" id="patient_name" name="patient_name" value = '{{cases.id}}'>
+            
+          </div> 
+       
+          <div class="form-group col-md-6">
+            <label for="description">Description</label>
+            {% render_field form.description  placeholder="Description" type="text" class="form-control" %}
+          </div> 
+
+          <div class="form-group col-md-6">
+            <label for="case_status">Status</label>
+            {% render_field form.case_status placeholder="Case" type="text" class="form-control" %}
+          </div> 
+
+    <button type="submit" class="btn btn-primary active">Submit</button> 
+  </form>
+
+ {%endblock%}
+ 

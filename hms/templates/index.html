@@ -79,7 +79,7 @@
           <img src="{% static 'images/logo.png'%}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{request.user}}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -91,7 +91,7 @@
             <a href="{% url  'home' %}" class="nav-link">
               <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
               <p>
-                Dashboard
+                DASHBOARD
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>        
@@ -100,7 +100,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Patient
+                PATIENT
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -108,9 +108,16 @@
               <li class="nav-item">
                 <a href="{% url 'patientList' %}" class="nav-link">
                   <i class="fa fa-plus-circle nav-icon"></i>
+                  <p>Patients on Queue</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'queue' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Patient List</p>
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="{% url 'addPatient' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -118,7 +125,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="{% url 'payments' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Payment</p>
                 </a>
@@ -133,6 +140,49 @@
                 <a href="pages/charts/inline.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Document</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                APPOINTMENTS
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fa fa-plus-circle nav-icon"></i>
+                  <p>Add Appointment</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'queue' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Appointment</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Appointments</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Todays Appointments</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url  'case' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Upcoming Appointments</p>
                 </a>
               </li>
             </ul>
